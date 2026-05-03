@@ -1,11 +1,14 @@
 "use client"
 import { useState } from "react"
 import Input from "@/components/Input"
+import History from "./History"
 import KeyListener from "@/components/KeyListener"
 
 
 export default function Terminal() {
     const [input, setInput] = useState<string>("")
+    const [sentLines, setSentLines] = useState<string[]>([])
+
     const backspace = ()=>{
         if (input){
             setInput(input.slice(0, -1))
@@ -14,18 +17,26 @@ export default function Terminal() {
     const keyPress = (key: string) =>{
         setInput(input + key)
     }
+    const addLine = () => {
+        setSentLines(sentLines => [...sentLines, input])
+        setInput("")
+    }
+
+    
 
     return (
-        <div>
-            <div className="absolute flex left-10 sm:left-50 bottom-10 w-full">
+        <div className="absolute flex flex-col left-10 sm:left-50 bottom-10 w-full">
+                <History
+                    sentLines={sentLines}
+                />
                 <Input
                     input={input}
                 />
-            </div>
                 <KeyListener
-                onKey={keyPress}
-                onBackspace={backspace}
-            />
+                    onKey={keyPress}
+                    onBackspace={backspace}
+                    onEnter={addLine}
+                />
         </div>
 
     )
