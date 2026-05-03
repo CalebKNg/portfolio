@@ -25,7 +25,7 @@ export default function Terminal() {
     
 
     return (
-        <div className="absolute flex flex-col left-10 sm:left-50 bottom-10 w-full">
+        <div className="absolute flex flex-col left-10 sm:left-50 bottom-10 w-full pointer-events-none">
                 <History
                     sentLines={sentLines}
                 />
