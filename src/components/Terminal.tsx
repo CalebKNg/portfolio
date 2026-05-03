@@ -7,7 +7,8 @@ import KeyListener from "@/components/KeyListener"
 
 export default function Terminal() {
     const [input, setInput] = useState<string>("")
-    const [sentLines, setSentLines] = useState<string[]>([])
+    const [sentLines, setSentLines] = useState<string[]>(Array(30).fill(""))
+
 
     const backspace = ()=>{
         if (input){
@@ -18,10 +19,9 @@ export default function Terminal() {
         setInput(input + key)
     }
     const addLine = () => {
-        setSentLines(sentLines => [...sentLines, input])
+        setSentLines(sentLines => [...sentLines.slice(-29), input])
         setInput("")
     }
-
     
 
     return (
