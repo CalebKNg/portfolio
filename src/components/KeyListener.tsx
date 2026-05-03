@@ -26,6 +26,6 @@ export default function KeyListener({onKey, onBackspace, onEnter} : KeyListenerP
             window.removeEventListener('keydown', handleKeyDown)
         }
         
-    }, [onKey, onBackspace]);
+    }, [onKey, onBackspace, onEnter]);
     return null
 }
