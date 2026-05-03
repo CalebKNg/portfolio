@@ -12,7 +12,7 @@ export default function Terminal() {
 
     const backspace = ()=>{
         if (input){
-            setInput(input.slice(0, -1))
+            setInput(input => input.slice(0, -1))
         }
     }
     const keyPress = (key: string) =>{
