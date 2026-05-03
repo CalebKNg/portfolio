@@ -11,7 +11,7 @@ export default function KeyListener({onKey, onBackspace} : KeyListenerProps){
             if (event.key === 'Backspace') {
                 onBackspace()
             }
-            if (event.key.length === 1 && event.key.match(/[a-zA-Z0-9 ]/)) {
+            if (event.key.length === 1) {
                 onKey(event.key)
             }
         }
