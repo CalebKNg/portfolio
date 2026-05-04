@@ -1,14 +1,4 @@
-"use client"
-
-import Profile from "@/components/Profile"
-import Terminal from "@/components/Terminal"
-export default function Home() {
-
-    return (
-        <div className="relative flex flex-col h-dvh">
-            <div className="flex-1 flex items-center justify-center">
-                <Profile/>
-            </div>
-        </div>
-    )
+import { redirect } from "next/navigation"
+export default function Landing() {
+    redirect('/home')
 }
