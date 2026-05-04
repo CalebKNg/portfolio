@@ -4,10 +4,12 @@ import Input from "@/components/Input"
 import History from "./History"
 import KeyListener from "@/components/KeyListener"
 import Autocomplete from "./Autocomplete"
+import { useRouter } from 'next/navigation'
 
 const autocompleteOptions = ["/home", "/about", "/skills", "/experience", "/projects"]
 
 export default function Terminal() {
+    const router = useRouter()
     const [input, setInput] = useState<string>("")
     const [sentLines, setSentLines] = useState<string[]>(Array(30).fill(""))
     const [selectedCommandIndex, setSelectedCommandIndex] = useState<number>(0)
@@ -36,13 +38,23 @@ export default function Terminal() {
         setInput("")
     }
     const onEnter = () => {
+        // process autocomplete
+        if (availableCommands.length != 0) {
+            router.push(availableCommands[selectedCommandIndex])
+            setInput("")
+            return
+        }
         addLine()
         // process the enter command
         switch (input) {
             case "clear":
                 // clear terminal
                 setSentLines(Array(30).fill(""))
+                break
         }
+    }
+    const onTab = () => {
+        setInput(availableCommands[selectedCommandIndex])
     }
   
     return (
@@ -72,6 +84,7 @@ export default function Terminal() {
                     onArrowUp={() => {
                         if(selectedCommandIndex > 0) setSelectedCommandIndex(selectedCommandIndex => selectedCommandIndex - 1)
                     }}
+                    onTab={onTab}
                 />
         </div>
 

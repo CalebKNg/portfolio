@@ -7,9 +7,10 @@ interface KeyListenerProps {
     onArrowUp?: () => void
     onArrowDown?: () => void
     onEscape?: () => void
+    onTab: () => void
 }
 
-export default function KeyListener({onKey, onBackspace, onEnter, onArrowUp, onArrowDown, onEscape} : KeyListenerProps){
+export default function KeyListener({onKey, onBackspace, onEnter, onArrowUp, onArrowDown, onEscape, onTab} : KeyListenerProps){
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === 'Backspace') {
@@ -25,6 +26,10 @@ export default function KeyListener({onKey, onBackspace, onEnter, onArrowUp, onA
             if (event.key === 'ArrowDown') {
                 event.preventDefault()
                 onArrowDown?.()
+            }
+            if (event.key === 'Tab') {
+                event.preventDefault()
+                onTab()
             }
             if (event.key === 'Escape') {
                 onEscape?.()
