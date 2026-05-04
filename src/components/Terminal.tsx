@@ -22,6 +22,15 @@ export default function Terminal() {
         setSentLines(sentLines => [...sentLines.slice(-29), input])
         setInput("")
     }
+    const onEnter = () => {
+        addLine()
+        // process the enter command
+        switch (input) {
+            case "clear":
+                // clear terminal
+                setSentLines(Array(30).fill(""))
+        }
+    }
     
 
     return (
@@ -35,7 +44,7 @@ export default function Terminal() {
                 <KeyListener
                     onKey={keyPress}
                     onBackspace={backspace}
-                    onEnter={addLine}
+                    onEnter={onEnter}
                 />
         </div>
 
