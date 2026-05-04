@@ -13,7 +13,8 @@ export default function Terminal() {
     const [input, setInput] = useState<string>("")
     const [sentLines, setSentLines] = useState<string[]>(Array(30).fill(""))
     const [selectedCommandIndex, setSelectedCommandIndex] = useState<number>(0)
-
+    const [hintDismissed, setHintDismissed] = useState<boolean>(false)
+    
     // Autocomplete
     const availableCommands = autocompleteOptions.filter((option: string) => {
         const inputLen = input.length
@@ -32,6 +33,7 @@ export default function Terminal() {
     const keyPress = (key: string) =>{
         setInput(input + key)
         setSelectedCommandIndex(0)
+        if (key == "/") setHintDismissed(true)
     }
     const addLine = () => {
         setSentLines(sentLines => [...sentLines.slice(-29), input])
@@ -72,6 +74,11 @@ export default function Terminal() {
                     <Input
                         input={input}
                     />
+                {!hintDismissed && (
+                        <p className="fixed bottom-4 left-0 w-full text-center opacity-50 font-roboto">
+                           try: /
+                        </p>
+                    )}
                 </div>
                 <KeyListener
                     onKey={keyPress}
