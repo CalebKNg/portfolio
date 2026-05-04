@@ -29,6 +29,7 @@ export default function Terminal() {
     }
     const keyPress = (key: string) =>{
         setInput(input + key)
+        setSelectedCommandIndex(0)
     }
     const addLine = () => {
         setSentLines(sentLines => [...sentLines.slice(-29), input])
@@ -49,17 +50,28 @@ export default function Terminal() {
                 <History
                     sentLines={sentLines}
                 />
-                <Autocomplete
-                    commands={availableCommands}
-                    selectedIndex={selectedCommandIndex}
-                />
-                <Input
-                    input={input}
-                />
+                <div className="relative">
+                    <div className="absolute bottom-full">
+                        <Autocomplete
+                            commands={availableCommands}
+                            selectedIndex={selectedCommandIndex}
+                        />
+                    </div>
+                    <Input
+                        input={input}
+                    />
+                </div>
                 <KeyListener
                     onKey={keyPress}
                     onBackspace={backspace}
                     onEnter={onEnter}
+                    onArrowDown={() => {
+                            if (selectedCommandIndex < availableCommands.length -1) setSelectedCommandIndex(selectedCommandIndex => selectedCommandIndex + 1)
+                        }
+                    }
+                    onArrowUp={() => {
+                        if(selectedCommandIndex > 0) setSelectedCommandIndex(selectedCommandIndex => selectedCommandIndex - 1)
+                    }}
                 />
         </div>
 
