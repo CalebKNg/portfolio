@@ -17,6 +17,7 @@ export default function KeyListener({onKey, onBackspace, onEnter, onArrowUp, onA
                 onBackspace()
             }
             if (event.key === 'Enter'){
+                event.preventDefault()
                 onEnter()
             }
             if (event.key === 'ArrowUp') {
