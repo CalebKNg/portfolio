@@ -6,10 +6,10 @@
 }
 
 ::view-transition-old(page) {
-  animation: 200ms ease-in both fade-out, 200ms ease-in both slide-out;
+  animation: 200ms ease-in both fade-out, 200ms ease-in-out both slide-out;
 }
 ::view-transition-new(page) {
-  animation: 200ms ease-out 200ms both fade-in, 200ms ease-out 200ms both slide-in;
+  animation: 200ms ease-out 200ms both fade-in, 200ms ease-in-out 200ms both slide-in;
 }
 
 @keyframes fade-out {
