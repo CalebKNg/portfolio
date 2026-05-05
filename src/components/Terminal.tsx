@@ -56,7 +56,7 @@ export default function Terminal() {
         }
     }
     const onTab = () => {
-        setInput(availableCommands[selectedCommandIndex])
+        if(availableCommands.length!= 0) setInput(availableCommands[selectedCommandIndex])
     }
   
     return (
